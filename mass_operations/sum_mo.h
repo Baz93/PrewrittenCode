@@ -9,10 +9,6 @@ template<typename T> struct SumMO {
 		return lhs + rhs;
 	}
 	
-	Value chain (pass(Value) lhs, pass(Value) rhs) {
-		return lhs + rhs;
-	}
-	
 	Value reverse (pass(Value) val) {
 		return -val;
 	}

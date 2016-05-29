@@ -54,7 +54,7 @@ private:
 		a[v].info = imo.unite(a[u].info, a[v].info);
 		#endif
 		#ifdef DSU_RELATION
-		a[u].relation = rmo.chain(a[u].relation, a[v].relation);
+		a[u].relation = rmo.unite(a[u].relation, a[v].relation);
 		#endif
 	}
 	
@@ -102,7 +102,7 @@ public:
 		r.push(a[v]);
 		#endif
 		#ifdef DSU_INFO
-		a[v].relation = rmo.chain(a[v].relation, a[a[v].parent].relation);
+		a[v].relation = rmo.unite(a[v].relation, a[a[v].parent].relation);
 		#endif
 		return a[v].parent = result;
 	}
@@ -128,7 +128,7 @@ public:
 	}
 	
 	typename Relation::Value relation (int u, int v) {
-		return rmo.chain(relation(u), rmo.reverse(relation(v)));
+		return rmo.unite(relation(u), rmo.reverse(relation(v)));
 	}
 	
 	#endif
@@ -138,11 +138,11 @@ public:
 		#endif
 	) {//@prevline
 		#ifdef DSU_RELATION
-		rel = rmo.chain(rmo.reverse(relation(u)), rel);
+		rel = rmo.unite(rmo.reverse(relation(u)), rel);
 		#endif
 		u = get_root(u);
 		#ifdef DSU_RELATION
-		rel = rmo.chain(rel, rmo.reverse(relation(u)));
+		rel = rmo.unite(rel, rmo.reverse(relation(u)));
 		#endif
 		v = get_root(v);
 		if (u == v) {
