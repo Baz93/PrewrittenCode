@@ -1,6 +1,6 @@
 #pragma once
 //@prevline
-#include "../pass_argument.h"
+#include "../base.h"
 //@prevline
 template<typename T> struct SumMO {
 	typedef T Value;

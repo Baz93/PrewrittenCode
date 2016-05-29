@@ -1,7 +1,6 @@
 #pragma once
 //@prevline
 #include "../base.h"
-#include "../lib_assert.h"
 //@prevline
 template<typename T> class Retriever {
 private:
