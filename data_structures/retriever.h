@@ -2,10 +2,10 @@
 //@prevline
 #include "../base.h"
 #include "../lib_assert.h"
-
+//@prevline
 template<typename T> class Retriever {
 private:
-	ve<pa<T*, T> > v;
+	ve<pa<T *, T> > v;
 	
 public:
 	void push (T &a) {
@@ -23,4 +23,5 @@ public:
 		}
 	}
 };
-
+//@prevline
+//@prevline

@@ -2,7 +2,7 @@
 //@prevline
 #include "../base.h"
 #include "../lib_assert.h"
-
+//@prevline
 template<typename T, int N = -1> class Varray : private array<T, N> {
 private:
 	int n;
@@ -31,7 +31,7 @@ public:
 	}
 };
 
-template<typename T> class Varray<T, -1> : private vector<T> {
+template<typename T> class Varray<T, -1> : private ve<T> {
 public:
 	T &operator[] (int i) {
 		lib_assert(i >= 0);
@@ -54,4 +54,5 @@ public:
 		vector<T>::resize(s);
 	}
 };
-
+//@prevline
+//@prevline

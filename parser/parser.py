@@ -3,8 +3,10 @@ import os
 import re
 
 ignore = frozenset([
-	"base.h",
+	"template.h",
 	"lib_assert.h",
+	"utils.h",
+	"pass_argument.h",
 ])
 
 stack = []
@@ -55,6 +57,7 @@ def parse(path):
 		used.add(path)
 
 	with open(path) as file:
+		needNewLine = False
 		for line in file:
 			line = line.rstrip('\n')
 			trimmedLine = line.lstrip('\t')
@@ -107,9 +110,11 @@ def parse(path):
 						del defines[key]
 					continue
 
-				if trimmedLine.startswith('#include'):
-					parts = trimmedLine[len('#include'):].split('"')
+			if trimmedLine.startswith('#include'):
+				parts = trimmedLine[len('#include'):].split('"')
+				if len(parts) > 1:
 					parse(os.path.join(os.path.dirname(path), parts[1]))
+					needNewLine = False
 					continue
 
 			if len(defines) > 0:
@@ -124,10 +129,12 @@ def parse(path):
 					firstLine = False
 				else:
 					sys.stdout.write('\n')
-
 				sys.stdout.write(line)
+				needNewLine = True
+
+		if needNewLine:
+			sys.stdout.write('\n')
 
 
 parse(sys.argv[1])
-sys.stdout.write('\n')
 
