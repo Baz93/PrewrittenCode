@@ -4,17 +4,16 @@
 //@prevline
 template<typename T> struct SumMO {
 	typedef T Value;
-	typedef typename PassArgument<T>::Type PassValue;
 	
-	Value unite (PassValue lhs, PassValue rhs) {
+	Value unite (pass(Value) lhs, pass(Value) rhs) {
 		return lhs + rhs;
 	}
 	
-	Value chain (PassValue lhs, PassValue rhs) {
+	Value chain (pass(Value) lhs, pass(Value) rhs) {
 		return lhs + rhs;
 	}
 	
-	Value reverse (PassValue val) {
+	Value reverse (pass(Value) val) {
 		return -val;
 	}
 };
