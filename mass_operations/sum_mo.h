@@ -2,8 +2,19 @@
 //@prevline
 #include "../base.h"
 //@prevline
-template<typename T> struct SumMO {
+template<typename T> class SumMO {
+public:
 	typedef T Value;
+	
+private:
+	Value zero;
+	
+public:
+	SumMO (Value zero_val = Value()) : zero(zero_val) {}
+	
+	Value neutral (pass(Value) val) {
+		return zero;
+	}
 	
 	Value unite (pass(Value) lhs, pass(Value) rhs) {
 		return lhs + rhs;
