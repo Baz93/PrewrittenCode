@@ -51,7 +51,8 @@ def parse(path):
 	path = os.path.normpath(path)
 	global firstLine
 
-	isIgnored = os.path.basename(path) in ignore
+	filename = os.path.basename(path)
+	isIgnored = (filename in ignore) or (filename.endswith('.cpp')) 
 	isDuplicate = path in used
 	if not isDuplicate:
 		used.add(path)
