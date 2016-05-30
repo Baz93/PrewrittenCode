@@ -161,8 +161,8 @@ public:
 		);//@prevline
 		return 1;
 	}
-	
 	#ifdef DSU_RETRIEVE
+	
 	int get_state () const {
 		return r.get_state();
 	}
