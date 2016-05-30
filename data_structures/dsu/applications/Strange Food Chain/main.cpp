@@ -1,5 +1,5 @@
 #include "data_structures/dsu/relative_dsu.h"
-#include "number_theory/modular_arithmetic.h"
+#include "number_theory/modular_arithmetic/modular_arithmetic.h"
 #include "mass_operations/sum_mo.h"
 
 const int N = 50000;
