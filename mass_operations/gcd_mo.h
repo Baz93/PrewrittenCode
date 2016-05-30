@@ -1,6 +1,6 @@
 #pragma once
 //@prevline
-#include "../number_theory/gcd.h"
+#include "number_theory/gcd.h"
 //@prevline
 template<typename T> class GcdMO {
 public:

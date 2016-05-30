@@ -1,3 +1,5 @@
+#!py -3
+
 import sys
 import os
 import re
@@ -47,9 +49,19 @@ def calcExpression(expr):
 used = set()
 firstLine = True
 
-def parse(path):
-	path = os.path.normpath(path)
+libPath = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)
+
+def parse(prevDir, newPath):
 	global firstLine
+	
+	if os.path.isfile(os.path.join(prevDir, newPath)):
+		path = os.path.join(prevDir, newPath)
+	elif os.path.isfile(os.path.join(libPath, newPath)):
+		path = os.path.join(libPath, newPath)
+	else:
+		raise IOError("lib not found")
+
+	path = os.path.normpath(path)
 
 	filename = os.path.basename(path)
 	isIgnored = (filename in ignore) or (filename.endswith('.cpp')) 
@@ -114,7 +126,7 @@ def parse(path):
 			if trimmedLine.startswith('#include'):
 				parts = trimmedLine[len('#include'):].split('"')
 				if len(parts) > 1:
-					parse(os.path.join(os.path.dirname(path), parts[1]))
+					parse(os.path.dirname(path), parts[1])
 					needNewLine = False
 					continue
 
@@ -137,5 +149,5 @@ def parse(path):
 			sys.stdout.write('\n')
 
 
-parse(sys.argv[1])
+parse('.', sys.argv[1])
 

@@ -1,6 +1,6 @@
 #pragma once
 //@prevline
-#include "../base.h"
+#include "base.h"
 //@prevline
 /**
 * ax + by = result

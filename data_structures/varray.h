@@ -1,6 +1,6 @@
 #pragma once
 //@prevline
-#include "../base.h"
+#include "base.h"
 //@prevline
 template<typename T, int N = -1> class Varray : private array<T, N> {
 private:

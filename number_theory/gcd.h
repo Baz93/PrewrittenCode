@@ -1,6 +1,6 @@
 #pragma once
 //@prevline
-#include "../base.h"
+#include "base.h"
 //@prevline
 template<typename T> T gcd (pass(T) a, pass(T) b) {
 	while (a) {

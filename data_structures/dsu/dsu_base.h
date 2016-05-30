@@ -1,6 +1,6 @@
-#include "../varray.h"
+#include "data_structures/varray.h"
 #ifdef DSU_RETRIEVE
-#include "../retriever.h"
+#include "data_structures/retriever.h"
 #endif
 //@prevline
 template<
