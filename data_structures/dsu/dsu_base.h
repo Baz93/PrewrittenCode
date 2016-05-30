@@ -1,5 +1,5 @@
 #include "../varray.h"
-#ifdef DSU_RELATION
+#ifdef DSU_RETRIEVE
 #include "../retriever.h"
 #endif
 //@prevline
@@ -41,7 +41,7 @@ private:
 	#endif
 	void link (int u, int v
 		#ifdef DSU_RELATION
-		, const typename Relation::Value &rel//@prevline
+		, pass(typename Relation::Value) rel//@prevline
 		#endif
 	) {//@prevline
 		#ifdef DSU_RETRIEVE
@@ -54,7 +54,7 @@ private:
 		a[v].info = imo.unite(a[u].info, a[v].info);
 		#endif
 		#ifdef DSU_RELATION
-		a[u].relation = rmo.unite(a[u].relation, a[v].relation);
+		a[u].relation = rel;
 		#endif
 	}
 	
@@ -67,18 +67,18 @@ public:
 		, Info info_mo = Info()//@prevline
 		#endif
 		#ifdef DSU_RELATION
-		, Relation relation_mo = Relation()//@prevline
+		, pass(Relation) relation_mo = Relation()//@prevline
 		#endif
 	) {
 		#ifdef DSU_INFO
-		imo(info_mo);
+		imo = info_mo;
 		#endif
 		#ifdef DSU_RELATION
-		rmo(relation_mo);
+		rmo = relation_mo;
 		#endif
 		a.resize(size);
 		forn (i, sz(a)) {
-			a[i].patrent = i;
+			a[i].parent = i;
 			a[i].size = 1;
 			#ifdef DSU_INFO
 			a[i].info = imo.neutral();
@@ -101,7 +101,7 @@ public:
 		#ifdef DSU_RETRIEVE
 		r.push(a[v]);
 		#endif
-		#ifdef DSU_INFO
+		#ifdef DSU_RELATION
 		a[v].relation = rmo.unite(a[v].relation, a[a[v].parent].relation);
 		#endif
 		return a[v].parent = result;
@@ -134,7 +134,7 @@ public:
 	#endif
 	bool unite (int u, int v
 		#ifdef DSU_RELATION
-		, typename Relation::Value rel//@prevline
+		, pass(typename Relation::Value) rel//@prevline
 		#endif
 	) {//@prevline
 		#ifdef DSU_RELATION
@@ -142,14 +142,17 @@ public:
 		#endif
 		u = get_root(u);
 		#ifdef DSU_RELATION
-		rel = rmo.unite(rel, rmo.reverse(relation(u)));
+		rel = rmo.unite(rel, relation(v));
 		#endif
 		v = get_root(v);
 		if (u == v) {
 			return 0;
 		}
-		if (a[u].size() > a[v].size()) {
+		if (a[u].size > a[v].size) {
 			swap(u, v);
+			#ifdef DSU_RELATION
+			rel = rmo.reverse(rel);
+			#endif
 		}
 		link(u, v
 			#ifdef DSU_RELATION

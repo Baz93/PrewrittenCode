@@ -26,7 +26,7 @@ public:
 	void resize (int s) const {
 		lib_assert(s >= 0);
 		lib_assert(s <= N);
-		return n = size;
+		return n = s;
 	}
 };
 
@@ -48,7 +48,7 @@ public:
 		return int(vector<T>::size());
 	}
 	
-	void resize (int s) const {
+	void resize (int s) {
 		lib_assert(s >= 0);
 		vector<T>::resize(s);
 	}
