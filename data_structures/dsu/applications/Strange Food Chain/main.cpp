@@ -1,4 +1,4 @@
-#include "relative_dsu.h"
+#include "data_structures/dsu/relative_dsu.h"
 #include "number_theory/modular_arithmetic.h"
 #include "mass_operations/sum_mo.h"
 
@@ -38,8 +38,10 @@ struct Data: Input {
 
 namespace Main {
 	
+	typedef ModularArithmetic<3> z3;
+	
 	struct Solution: Data {
-		RelativeDSU<SumMO<ModularArithmetic<3> > > dsu;
+		RelativeDSU<SumMO<z3> > dsu;
 		
 		void solve () {
 			dsu.initialize(n);
@@ -49,8 +51,8 @@ namespace Main {
 					++ans;
 					continue;
 				}
-				if (!dsu.unite(x[i], y[i], ModularArithmetic<3>::valueOf(z[i]))) {
-					if (dsu.relation(x[i], y[i]) != z[i]) {
+				if (!dsu.unite(x[i], y[i], z[i])) {
+					if (dsu.relation(x[i], y[i]) != z3(z[i])) {
 						++ans;
 					}
 				}
