@@ -4,6 +4,10 @@
 //@prevline
 template<int mod> class ModularArithmetic {
 private:
+
+	/**
+	* abs(value) should not be greater than mod
+	*/
 	int value;
 	
 	static_assert(mod > 0, "Mod has to be positive");
@@ -12,58 +16,47 @@ private:
 	
 public:
 	ModularArithmetic () : value(0) {}
-	
-	ModularArithmetic (int val) : value(val % mod) {
-		if (value < 0) {
-			value += mod;
-		}
-	}
-	
-	ModularArithmetic (ll val) : value(val % mod) {
-		if (value < 0) {
-			value += mod;
-		}
-	}
+	ModularArithmetic (int val) : value(val % mod) {}
+	ModularArithmetic (ll val) : value(val % mod) {}
 	
 	/**
 	* No normalization performed
 	*/
-	static ModularArithmetic rawValue (int val) {
+	static ModularArithmetic interpret (int val) {
 		return ModularArithmetic(val, 0);
 	}
 
 	bool operator== (ModularArithmetic rhs) {
-		return value == rhs.value;
+		return (value - rhs.value) % mod == 0;
 	}
 	
 	ModularArithmetic &operator+= (ModularArithmetic rhs) {
 		value += rhs.value;
-		if (value >= mod) {
+		if (value > 0) {
 			value -= mod;
+		} else {
+			value += mod;
 		}
 		return *this;
 	}
 	
 	ModularArithmetic &operator-= (ModularArithmetic rhs) {
 		value -= rhs.value;
-		if (value < 0) {
+		if (value > 0) {
+			value -= mod;
+		} else {
 			value += mod;
 		}
 		return *this;
 	}
 	
 	ModularArithmetic &operator*= (ModularArithmetic rhs) {
-		ll result = ll(value) * ll(rhs.value);
-		value = result % mod;
+		value = ll(value) * ll(rhs.value) % mod;
 		return *this;
 	}
 	
 	ModularArithmetic operator- () const {
-		if (value == 0) {
-			return *this;
-		} else {
-			return rawValue(mod - value);
-		}
+		return interpret(-value);
 	}
 	
 	ModularArithmetic &operator/= (ModularArithmetic rhs) {
@@ -71,20 +64,18 @@ public:
 	}
 	
 	ModularArithmetic inversed () const {
-		lib_assert(value != 0);
-		
 		int x, y;
 		int d = extendedGcd(value, mod, x, y);
 		(void)d;
-		lib_assert(d == 1);
-		
-		if (x < 0) {
-			x += mod;
-		}
-		return rawValue(x);
+		lib_assert(d == 1);		
+		return interpret(x);
 	}
 	
-	int intValue () const {
+	int int_value () const {
+		return (value + mod) % mod;
+	}
+	
+	int raw_value () const {
 		return value;
 	}
 };
@@ -110,7 +101,7 @@ template<int mod> ModularArithmetic<mod> operator/ (ModularArithmetic<mod> lhs, 
 }
 
 template<int mod> std::ostream &operator<< (std::ostream &stream, ModularArithmetic<mod> zn) {
-	return stream << zn.intValue();
+	return stream << zn.int_value();
 }
 
 template<int mod> std::istream &operator>> (std::istream &stream, ModularArithmetic<mod> &zn) {
