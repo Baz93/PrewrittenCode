@@ -11,7 +11,9 @@ template<typename T> struct PassArgument {
 		T, const T &//@prevline
 	>::type Type;//@prevline
 };
-//@prevline
+template<typename T> T common_argument (initializer_list<T> args) {return declval<T>();}
+
 #define pass(T) typename PassArgument<T>::Type
+#define basetype(...) decltype(common_argument({__VA_ARGS__}))
 //@prevline
 //@prevline

@@ -7,8 +7,8 @@ import re
 ignore = frozenset([
 	"template.h",
 	"lib_assert.h",
+	"type_traits.h",
 	"utils.h",
-	"pass_argument.h",
 ])
 
 stack = []
