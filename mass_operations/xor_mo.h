@@ -21,7 +21,7 @@ public:
 	}
 	
 	Value reverse (pass(Value) val) {
-		return ~val;
+		return val;
 	}
 };
 //@prevline
