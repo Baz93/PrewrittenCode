@@ -20,7 +20,7 @@ public:
 		lib_assert(i >= 0);
 		lib_assert(i < sz(a));
 		for	(; i < n; i |= i + 1) {
-			a[i] = mo.unite(a[i], val);
+			mo.set_unite_r(a[i], val);
 		}
 	}
 	
@@ -29,7 +29,7 @@ public:
 		lib_assert(i <= sz(a));
 		typename MO::Value res = mo.neutral();
 		for (; i; i &= i - 1) {
-			res = mo.unite(res, a[i - 1]);
+			mo.set_unite_r(res, a[i - 1]);
 		}
 		return res;
 	}
@@ -48,7 +48,7 @@ public:
 			if (next < l) {
 				break;
 			}
-			res = mo.unite(a[r - 1], res);
+			set_unite_r(res, a[r - 1]);
 			r = next;
 		}
 		return res;

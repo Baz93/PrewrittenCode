@@ -51,7 +51,7 @@ private:
 		a[u].parent = v;
 		a[v].size += a[u].size;
 		#ifdef DSU_INFO
-		a[v].info = imo.unite(a[u].info, a[v].info);
+		imo.set_unite_l(a[v].info, a[u].info);
 		#endif
 		#ifdef DSU_RELATION
 		a[u].relation = rel;
@@ -102,7 +102,7 @@ public:
 		r.push(a[v]);
 		#endif
 		#ifdef DSU_RELATION
-		a[v].relation = rmo.unite(a[v].relation, a[a[v].parent].relation);
+		rmo.set_unite_r(a[v].relation, a[a[v].parent].relation);
 		#endif
 		return a[v].parent = result;
 	}
@@ -138,11 +138,11 @@ public:
 		#endif
 	) {//@prevline
 		#ifdef DSU_RELATION
-		rel = rmo.unite(rmo.reverse(relation(u)), rel);
+		rmo.set_unite_l(rel, rmo.reverse(relation(u)));
 		#endif
 		u = get_root(u);
 		#ifdef DSU_RELATION
-		rel = rmo.unite(rel, relation(v));
+		rmo.set_unite_r(rel, relation(v));
 		#endif
 		v = get_root(v);
 		if (u == v) {
