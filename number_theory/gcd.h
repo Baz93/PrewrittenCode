@@ -2,7 +2,7 @@
 //@prevline
 #include "base.h"
 //@prevline
-template<typename T> T gcd (pass(T) a, pass(T) b) {
+template<typename T> inline T gcd (pass(T) a, pass(T) b) {
 	while (a) {
 		swap(a, b);
 		a %= b;

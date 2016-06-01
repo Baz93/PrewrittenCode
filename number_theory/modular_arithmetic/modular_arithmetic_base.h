@@ -87,31 +87,31 @@ public:
 	}
 };
 
-template<MODAR_TYPE mod> bool operator!= (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
+template<MODAR_TYPE mod> inline bool operator!= (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
 	return !(lhs == rhs);
 }
 
-template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> operator+ (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
+template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> inline operator+ (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
 	return lhs += rhs;
 }
 
-template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> operator- (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
+template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> inline operator- (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
 	return lhs -= rhs;
 }
 
-template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> operator* (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
+template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> inline operator* (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
 	return lhs *= rhs;
 }
 
-template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> operator/ (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
+template<MODAR_TYPE mod> MODAR_CLASSNAME<mod> inline operator/ (MODAR_CLASSNAME<mod> lhs, MODAR_CLASSNAME<mod> rhs) {
 	return lhs /= rhs;
 }
 
-template<MODAR_TYPE mod> std::ostream &operator<< (std::ostream &stream, MODAR_CLASSNAME<mod> zn) {
+template<MODAR_TYPE mod> inline std::ostream &operator<< (std::ostream &stream, MODAR_CLASSNAME<mod> zn) {
 	return stream << zn.int_value();
 }
 
-template<MODAR_TYPE mod> std::istream &operator>> (std::istream &stream, MODAR_CLASSNAME<mod> &zn) {
+template<MODAR_TYPE mod> inline std::istream &operator>> (std::istream &stream, MODAR_CLASSNAME<mod> &zn) {
 	ll value;
 	stream >> value;
 	zn = MODAR_CLASSNAME<mod>(value);
