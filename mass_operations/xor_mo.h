@@ -10,7 +10,7 @@ private:
 	Value zero;
 	
 public:
-	XorMO (Value zero_val = Value()) : zero(zero_val) {}
+	XorMO (pass(Value) zero_val = Value()) : zero(zero_val) {}
 	
 	Value neutral () {
 		return zero;

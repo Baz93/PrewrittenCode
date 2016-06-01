@@ -10,7 +10,7 @@ private:
 	Value zero;
 	
 public:
-	MinMO (Value zero_val = numeric_limits<Value>::max()) : zero(zero_val) {}
+	MinMO (pass(Value) zero_val = numeric_limits<Value>::max()) : zero(zero_val) {}
 	
 	Value neutral () {
 		return zero;

@@ -10,7 +10,7 @@ private:
 	Value zero;
 	
 public:
-	SumMO (Value zero_val = Value()) : zero(zero_val) {}
+	SumMO (pass(Value) zero_val = Value()) : zero(zero_val) {}
 	
 	Value neutral () {
 		return zero;

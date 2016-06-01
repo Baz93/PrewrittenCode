@@ -10,7 +10,7 @@ private:
 	Value zero;
 	
 public:
-	GcdMO (Value zero_val = Value()) : zero(zero_val) {}
+	GcdMO (pass(Value) zero_val = Value()) : zero(zero_val) {}
 	
 	Value neutral () {
 		return zero;

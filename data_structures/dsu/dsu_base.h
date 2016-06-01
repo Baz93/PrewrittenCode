@@ -64,7 +64,7 @@ public:
 	void initialize (
 		int size
 		#ifdef DSU_INFO
-		, Info info_mo = Info()//@prevline
+		, pass(Info) info_mo = Info()//@prevline
 		#endif
 		#ifdef DSU_RELATION
 		, pass(Relation) relation_mo = Relation()//@prevline
